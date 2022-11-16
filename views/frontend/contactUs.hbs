@@ -1,0 +1,73 @@
+
+  <main id="main">
+
+    <section id="contact" class="contact mb-5">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h1 class="page-title">Contact us</h1>
+          </div>
+        </div>
+
+        <div class="row gy-4">
+
+          <div class="col-md-4">
+            <div class="info-item">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Address</h3>
+              <address>A108 Adam Street, NY 535022, USA</address>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-md-4">
+            <div class="info-item info-item-borders">
+              <i class="bi bi-phone"></i>
+              <h3>Phone Number</h3>
+              <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-md-4">
+            <div class="info-item">
+              <i class="bi bi-envelope"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:info@example.com">info@example.com</a></p>
+            </div>
+          </div><!-- End Info Item -->
+
+        </div>
+
+        <div class="form mt-5">
+          {{!-- GOOGLE MAP --}}
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.815652120801!2d90.35941571543218!3d22.697905534078654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375534114f8a61bf%3A0x4ae79cb4608d315f!2z4Kas4Kaw4Ka_4Ka24Ka-4KayIOCmquCmsuCmv-Cmn-Cnh-CmleCmqOCmv-CmlSDgpofgpqjgprjgp43gpp_gpr_gpp_gpr_gpongpp8!5e0!3m2!1sen!2sbd!4v1668005209391!5m2!1sen!2sbd" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    </div>
+
+          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div><!-- End Contact Form -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
