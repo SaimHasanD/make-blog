@@ -20,6 +20,12 @@ module.exports={
       },
 
       show: (req, res, next)=> {
+        ContactModel.find((err,docs)=>{
+          if(err){
+              return res.json({error:"Something went wrong!"+err})
+          }
+          return res.json({contact:docs});
+      })
         res.render('backend/contact/show', { title: 'Admin Contact show', layout: 'backend/layout' });
       },
 

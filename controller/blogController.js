@@ -19,7 +19,13 @@ module.exports={
       },
 
       show: (req, res, next)=> {
-        res.render('backend/blog/show', { title: 'Admin blog show' , layout: 'backend/layout'});
+        BlogModel.find((err,docs)=>{
+          if(err){
+              return res.json({error:"Something went wrong!"+err})
+          }
+          return res.json({blogs:docs});
+      })
+        // res.render('backend/blog/show', { title: 'Admin blog show' , layout: 'backend/layout'});
       },
 
       store: (req, res, next)=> {

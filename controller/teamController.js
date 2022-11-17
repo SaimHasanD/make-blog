@@ -19,6 +19,12 @@ module.exports={
       },
 
       show: (req, res, next)=> {
+        TeamModel.find((err,docs)=>{
+          if(err){
+              return res.json({error:"Something went wrong!"+err})
+          }
+          return res.json({team:docs});
+      })
         res.render('backend/team/show', { title: 'Admin team show', layout: 'backend/layout' });
       },
 

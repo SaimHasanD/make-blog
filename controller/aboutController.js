@@ -19,6 +19,12 @@ module.exports={
       },
 
       show: (req, res, next)=> {
+        AboutModel.find((err,docs)=>{
+          if(err){
+              return res.json({error:"Something went wrong!"+err})
+          }
+          return res.json({about:docs});
+      })
         res.render('backend/about/show', { title: 'Admin blog show' , layout: 'backend/layout'});
       },
 
