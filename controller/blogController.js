@@ -4,6 +4,8 @@ const fs = require('fs');
 
 module.exports = {
   index: (req, res, next) => {
+    // blog List
+
     BlogModel.find((err, docs) => {
       if (err) {
         return res.json({ error: "Something went wrong!" + err });
@@ -30,7 +32,21 @@ module.exports = {
   },
 
   edit: (req, res, next) => {
-    res.render('backend/blog/edit', { title: 'Admin blog edit', layout: 'backend/layout' });
+
+    BlogModel.findById(req.params.id)
+      .then((blog) => {
+        // blog list
+        const details = {
+          title: blog.title,
+          slug: blog.slug,
+          id: blog._id,
+          details: blog.details,
+          image: blog.image
+        }
+        // console.log(details);
+        res.render('backend/blog/edit', { title: 'Blog Edit', layout: "backend/layout", blog: details });
+      })
+    // res.render('backend/blog/edit', { title: 'Admin blog edit', layout: 'backend/layout' });
   },
 
   delete: (req, res, next) => {
@@ -60,11 +76,21 @@ module.exports = {
   },
 
   show: (req, res, next) => {
-    BlogModel.find((err, docs) => {
-      if (err) {
-        return res.json({ error: "Something went wrong!" + err })
-      }
-      return res.json({ blogs: docs });
+    BlogModel.findById(req.params.id)
+    .then((blog)=>{
+        
+        // blog list
+        const details={
+            title:blog.title,
+            slug:blog.slug,
+            details:blog.details,
+            image:blog.image
+        }
+        // console.log(details);
+        res.render('backend/blog/show', { layout:"backend/layout",blog:details });
+    })
+    .catch((err)=>{
+        res.json({"error":"Somethiong went wrong!"});
     })
     // res.render('backend/blog/show', { title: 'Admin blog show' , layout: 'backend/layout'});
   },
