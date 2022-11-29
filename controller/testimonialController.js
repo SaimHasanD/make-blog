@@ -29,7 +29,7 @@ module.exports = {
   },
 
   store: (req, res, next) => {
-    BlogModel.find((err, docs) => {
+    TestimonialModel.find((err, docs) => {
       if (err) {
         return res.json({ error: "Something went wrong!" + err })
       }

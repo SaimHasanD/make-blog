@@ -1,7 +1,7 @@
 const { check } = require('express-validator');
 
 exports.store=[
-    check('image', "Invalid image").not().isEmpty().trim(),
+    check('image', "Invalid image"),
     check('title1', "Invalid title1").not().isEmpty().trim(),
     check('title2', "Invalid title2").not().isEmpty().trim(),
     check('details', "Invalid details").not().isEmpty().trim(),
@@ -9,7 +9,7 @@ exports.store=[
 ]
 
 exports.update=[
-    check('image', "Invalid image").not().isEmpty().trim(),
+    check('image', "Invalid image"),
     check('title1', "Invalid title1").not().isEmpty().trim(),
     check('title2', "Invalid title2").not().isEmpty().trim(),
     check('details', "Invalid details").not().isEmpty().trim(),

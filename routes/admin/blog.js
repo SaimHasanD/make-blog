@@ -10,7 +10,7 @@ router.get('/create', blogController.create);
 
 router.get('/:id/edit', blogController.edit);
 
-router.delete('/:id/delete', blogController.delete);
+router.post('/:id/delete', blogController.delete);
 
 router.get('/:id/show', blogController.show);
 
