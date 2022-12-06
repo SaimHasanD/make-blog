@@ -116,22 +116,23 @@ module.exports = {
       if (err)
         return res.status(500).send(err);
 
-      res.send('File uploaded!');
-    });
-    console.log(req.body);
+        res.redirect("/admin/blog/create");
+      });
 
     const blog = new BlogModel({
       title: req.body.title,
       image: filePath,
       details: req.body.details,
-      slug: req.body.slug
+      slug: filePath
     })
 
     blog.save((err, newBlog) => {
       if (err) {
         return res.json({ error: "Something went wrong!" + err });
       }
-      // return res.json({ blog: newBlog });
+      // res.redirect("/admin/blog");
+      return res.json(req.body);
+
     })
 
     // return res.json(req.body);
