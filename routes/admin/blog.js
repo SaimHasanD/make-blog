@@ -16,7 +16,7 @@ router.get('/:id/show', blogController.show);
 
 router.post('/store', request.store, blogController.store); 
 
-router.put('/:id/update', blogController.update);
+router.post('/:id/update', blogController.update);
 
 module.exports = router;
 

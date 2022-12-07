@@ -32,10 +32,24 @@ module.exports = {
     res.render('backend/about/create', { title: 'Admin about create', layout: 'backend/layout' });
   },
 
-  edit: (req, res, next) => {
-    res.render('backend/about/edit', { title: 'Admin about edit', layout: 'backend/layout' });
-  },
+  edit: (req, res, next) =>  {
 
+    AboutModel.findById(req.params.id)
+      .then((about) => {
+        // about list
+        const details = {
+          image: about.image,
+          title1: about.title1,
+          title2: about.title2,
+          details: about.details,
+          map: about.map,
+          id: about._id
+        }
+        // console.log(details);
+        res.render('backend/about/edit', { title: 'about Edit', layout: "backend/layout", about: details });
+      })
+    // res.render('backend/about/edit', { title: 'Admin about edit', layout: 'backend/layout' });
+  },
   delete: (req, res, next) => {
     AboutModel.findByIdAndRemove(req.params.id, (err, about) => {
       if (err) {
@@ -124,8 +138,40 @@ module.exports = {
     // res.render('index', { layout: 'backend/layout', });
   },
 
-  update: (req, res, next) => {
-    res.render('index', { title: 'Admin about update', layout: 'backend/layout' });
-  },
+  update: (req, res, next) =>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({ error: errors.mapped() });
+    }
 
+    let sampleFile;
+    console.log(req.files);
+    if (!req.files || Object.keys(req.files).length === 0) {
+      // return res.json(req.files);
+      return res.status(400).send('No files were uploaded.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = req.files.image;
+    let rnd = new Date().valueOf();
+    let filePath = 'upload/' + rnd + sampleFile.name;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('public/' + filePath, function (err) {
+      if (err)
+        // return res.status(500).send(err);
+
+        return res.redirect("/admin/about/create");
+    });
+
+    AboutModel.findByIdAndUpdate(req.params.id, {
+      image: filePath,
+      title1: req.body.title1,
+      title2: req.body.title2,
+      details: req.body.details,
+      map: req.body.map
+    }, (err, about) => {
+      return res.redirect("/admin/about")
+    })
+  }
 }

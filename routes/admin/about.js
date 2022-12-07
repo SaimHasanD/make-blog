@@ -10,13 +10,13 @@ router.get('/create', aboutController.create);
 
 router.get('/:id/edit', aboutController.edit);
 
-router.delete('/:id/delete', aboutController.delete);
+router.post('/:id/delete', aboutController.delete);
 
 router.get('/:id/show', aboutController.show);
 
 router.post('/store', request.store, aboutController.store); 
 
-router.put('/:id/update', aboutController.update);
+router.post('/:id/update', aboutController.update);
 
 module.exports = router;
 
