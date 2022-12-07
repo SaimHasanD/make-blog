@@ -1,60 +1,131 @@
 const { validationResult } = require('express-validator');
 const AboutModel = require('../Models/about')
+const fs = require('fs');
 
-module.exports={
-    index: (req, res, next)=> {
-        res.render('backend/about/index', { title: 'Admin blog', layout: 'backend/layout'});
-      },
+module.exports = {
+  index: (req, res, next) => {
+    // about List
 
-      create: (req, res, next)=> {
-        res.render('backend/about/create', { title: 'Admin blog create', layout: 'backend/layout'});
-      },
-      
-      edit: (req, res, next)=> {
-        res.render('backend/about/edit', { title: 'Admin blog edit', layout: 'backend/layout' });
-      },
+    AboutModel.find((err, docs) => {
+      if (err) {
+        return res.json({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          title1: element.title1,
+          title2: element.title2,
+          image: element.image,
+          details: element.details,
+          // map: element.map,
+          id: element._id,
+        });
+      });
 
-      delete: (req, res, next)=> {
-        res.render('index', { title: 'Admin blog delete' , layout: 'backend/layout'});
-      },
 
-      show: (req, res, next)=> {
-        AboutModel.find((err,docs)=>{
-          if(err){
-              return res.json({error:"Something went wrong!"+err})
-          }
-          return res.json({about:docs});
-      })
-        res.render('backend/about/show', { title: 'Admin blog show' , layout: 'backend/layout'});
-      },
+      // return res.json({about:docs});
+      res.render('backend/about/index', { title: 'about', layout: "backend/layout", data: data });
+    });
+  },
 
-      store: (req, res, next)=> {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          return res.json({error:errors.mapped()});
+  create: (req, res, next) => {
+    res.render('backend/about/create', { title: 'Admin about create', layout: 'backend/layout' });
+  },
+
+  edit: (req, res, next) => {
+    res.render('backend/about/edit', { title: 'Admin about edit', layout: 'backend/layout' });
+  },
+
+  delete: (req, res, next) => {
+    AboutModel.findByIdAndRemove(req.params.id, (err, about) => {
+      if (err) {
+        console.log("Could not deleted.");
+      }
+
+      // /delete file
+      try {
+        fs.unlink("public/" + about.image, () => {
+          console.log("File deleted====================================");
+        });
+      } catch (error) {
+        console.log("Something went wrong====================================");
+      }
+
+      // /
+      res.redirect("/admin/about");
+
+    });
+
+  },
+
+  show: (req, res, next) => {
+    AboutModel.findById(req.params.id)
+      .then((about) => {
+
+        // about list
+        const details = {
+          image: about.image,
+          title1: about.title1,
+          title2: about.title2,
+          details: about.details,
+          map: about.map
         }
+        // console.log(details);
+        res.render('backend/about/show', { layout: "backend/layout", about: details });
+      })
+      .catch((err) => {
+        res.json({ "error": "Something went wrong!" });
+      })
+    // res.render('backend/about/show', { title: 'Admin about show' , layout: 'backend/layout'});
+  },
 
-        const about = new AboutModel({
-          image: req.body.image,
-          title1: req.body.title1,
-          title2: req.body.title2,
-          details: req.body.details,
-          map: req.body.map
-        })
+  store: (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({ error: errors.mapped() });
+    }
 
-        about.save((err,newAbout)=>{
-          if(err){
-            return res.json({error:errors.mapped()});
-          }
-          return res.json({about:newAbout});
-        })
+    let sampleFile;
+    console.log(req.files);
+    if (!req.files || Object.keys(req.files).length === 0) {
+      // return res.json(req.files);
+      return res.status(400).send('No files were uploaded.');
+    }
 
-        // return res.json(req.body);
-        // res.render('index', { layout: 'backend/layout', });
-      },
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = req.files.image;
+    let rnd = new Date().valueOf();
+    let filePath = 'upload/' + rnd + sampleFile.name;
 
-      update: (req, res, next)=> {
-        res.render('index', { title: 'Admin blog update' , layout: 'backend/layout'});
-      },
-      
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('public/' + filePath, function (err) {
+      if (err)
+        // return res.status(500).send(err);
+
+        return res.redirect("/admin/about/create");
+    });
+
+    const about = new AboutModel({
+      image: filePath,
+      title1: req.body.title1,
+      title2: req.body.title2,
+      details: req.body.details,
+      map: req.body.map
+    })
+
+    about.save((err, newAbout) => {
+      if (err) {
+        return res.json({ error: errors.mapped() });
+      }
+      return res.json({ about: newAbout });
+    })
+
+    // return res.json(req.body);
+    // res.render('index', { layout: 'backend/layout', });
+  },
+
+  update: (req, res, next) => {
+    res.render('index', { title: 'Admin about update', layout: 'backend/layout' });
+  },
+
 }

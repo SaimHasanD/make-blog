@@ -50,13 +50,6 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    // BlogModel.findByIdAndRemove(req.params.id).then(() => {
-    //   console.log("deleted");
-    // }).catch((error) => {
-    //   console.log("could not deleted due to " + error);
-    // })
-    // res.redirect("/admin/blog");
-
     BlogModel.findByIdAndRemove(req.params.id, (err, blog) => {
       if (err) {
         console.log("Could not deleted.");
@@ -77,21 +70,21 @@ module.exports = {
 
   show: (req, res, next) => {
     BlogModel.findById(req.params.id)
-    .then((blog)=>{
-        
+      .then((blog) => {
+
         // blog list
-        const details={
-            title:blog.title,
-            slug:blog.slug,
-            details:blog.details,
-            image:blog.image
+        const details = {
+          title: blog.title,
+          slug: blog.slug,
+          details: blog.details,
+          image: blog.image
         }
         // console.log(details);
-        res.render('backend/blog/show', { layout:"backend/layout",blog:details });
-    })
-    .catch((err)=>{
-        res.json({"error":"Somethiong went wrong!"});
-    })
+        res.render('backend/blog/show', { layout: "backend/layout", blog: details });
+      })
+      .catch((err) => {
+        res.json({ "error": "Something went wrong!" });
+      })
     // res.render('backend/blog/show', { title: 'Admin blog show' , layout: 'backend/layout'});
   },
 
@@ -114,24 +107,24 @@ module.exports = {
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv('public/' + filePath, function (err) {
       if (err)
-        return res.status(500).send(err);
+        // return res.status(500).send(err);
 
-        res.redirect("/admin/blog/create");
-      });
+        return res.redirect("/admin/blog/create");
+    });
 
     const blog = new BlogModel({
       title: req.body.title,
       image: filePath,
       details: req.body.details,
-      slug: filePath
+      slug: req.body.slug
     })
 
     blog.save((err, newBlog) => {
       if (err) {
         return res.json({ error: "Something went wrong!" + err });
       }
-      // res.redirect("/admin/blog");
-      return res.json(req.body);
+      return res.redirect("/admin/blog");
+      // return res.json(req.body);
 
     })
 
@@ -140,7 +133,39 @@ module.exports = {
   },
 
   update: (req, res, next) => {
-    res.render('index', { title: 'Admin blog update', layout: 'backend/layout' });
+    console.log(req.body);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({ error: errors.mapped() });
+    }
+
+    let sampleFile;
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('No files were uploaded.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = req.files.image;
+    let rnd = new Date().valueOf();
+    let filePath = 'upload/' + rnd + sampleFile.name;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('public/' + filePath, function (err) {
+      if (err)
+        // return res.status(500).send(err);
+
+        return res.redirect("/admin/blog/create");
+    });
+
+    BlogModel.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      image: filePath,
+      details: req.body.details,
+      slug: req.body.slug
+    }, (err, blog) => {
+      return res.redirect("/admin/blog");
+    });
   },
 
 }

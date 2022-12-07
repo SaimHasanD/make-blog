@@ -1,9 +1,30 @@
 const { validationResult } = require('express-validator');
-const TestimonialModel = require('../Models/testimonial')
+const TestimonialModel = require('../Models/testimonial');
+const fs = require('fs');
 
 module.exports = {
   index: (req, res, next) => {
-    res.render('backend/testimonial/index', { title: 'Admin testimonial', layout: 'backend/layout' });
+    // testimonial List
+
+    TestimonialModel.find((err, docs) => {
+      if (err) {
+        return res.json({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          title: element.title,
+          details: element.details,
+          image: element.image,
+          slug: element.slug,
+          id: element._id
+        });
+      });
+
+
+      // return res.json({testimonials:docs});
+      res.render('backend/testimonial/index', { title: 'testimonial', layout: "backend/layout", data: data });
+    });
   },
 
   create: (req, res, next) => {
@@ -15,8 +36,24 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    res.render('index', { title: 'Admin testimonial delete', layout: 'backend/layout' });
+    TestimonialModel.findByIdAndRemove(req.params.id, (err, testimonial) => {
+      if (err) {
+        console.log("Could not deleted.");
+      }
+
+      // /delete file
+      try {
+        fs.unlink("public/" + testimonial.image, () => {
+          console.log("File deleted====================================");
+        });
+      } catch (error) {
+        console.log("Something went wrong====================================");
+      }
+      res.redirect("/admin/testimonial");
+
+    });
   },
+
 
   show: (req, res, next) => {
     TestimonialModel.find((err, docs) => {
@@ -33,7 +70,7 @@ module.exports = {
       if (err) {
         return res.json({ error: "Something went wrong!" + err })
       }
-      return res.json({ blogs: docs });
+      return res.json({ testimonials: docs });
     })
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
