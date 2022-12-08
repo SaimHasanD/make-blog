@@ -36,20 +36,20 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    ContactModel.findByIdAndDelete(req.params.id, (err, contact) => {
+    ContactModel.findByIdAndRemove(req.params.id, (err, blog) => {
       if (err) {
         console.log("Could not deleted.");
       }
 
       // /delete file
       try {
-        fs.unlink("public/" + contact.image, () => {
+        fs.unlink("public/" + blog.image, () => {
           console.log("File deleted====================================");
         });
       } catch (error) {
         console.log("Something went wrong====================================");
       }
-      res.redirect("/admin/contact");
+      res.redirect("/admin/contact-us");
 
     });
   },
@@ -65,24 +65,45 @@ module.exports = {
   },
 
   store: (req, res, next) => {
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   return res.json({ error: errors.mapped() });
-    // }
-    // const contact = new ContactModel({
-    //   icon: req.body.icon,
-    //   title: req.body.title,
-    //   details: req.body.details
-    // })
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({ error: errors.mapped() });
+    }
 
-    // contact.save((err, newContact) => {
-    //   if (err) {
-    //     return res.json({ err: err.mapped() });
-    //   }
-    //   return res.json({ contact: newContact });
-    // })
+        let sampleFile;
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('No files were uploaded.');
+    }
 
-    return res.json(req.body);
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    sampleFile = req.files.image;
+    let rnd = new Date().valueOf();
+    let filePath = 'upload/' + rnd + sampleFile.name;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('public/' + filePath, function (err) {
+      if (err)
+        // return res.status(500).send(err);
+
+        return res.redirect("/admin/contact-us/create");
+    });
+
+    const contact = new ContactModel({
+      image: filePath,
+      title: req.body.title,
+      details: req.body.details
+    })
+
+
+    
+    contact.save((err, newContact) => {
+      if (err) {
+        return res.json({ err: err.mapped() });
+      }
+      return res.redirect("/admin/contact-us");
+    })
+
+    // return res.json(req.body);
     // res.render('index', { layout: 'backend/layout', });
   },
 

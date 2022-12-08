@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 
 const ContactSchema = new mongoose.Schema({
-    icon : {
+    image : {
         type : String,
-        required : true
+        required : false
     },
 
     title : {
