@@ -132,41 +132,46 @@ module.exports = {
     // res.render('index', { layout: 'backend/layout', });
   },
 
-  update: (req, res, next) => {
-    console.log(req.body);
+  update:(req, res, next)=> {
+    const errors=validationResult(req);
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.json({ error: errors.mapped() });
+    if(!errors.isEmpty()){
+        return res.json({errors:errors.mapped()});
+    }
+    
+    let sampleFile,filePath;
+
+    if (req.files) {
+        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+        sampleFile = req.files.image;
+        let rnd=new Date().valueOf();
+        filePath='upload/' +rnd+sampleFile.name;
+        // Use the mv() method to place the file somewhere on your server
+        sampleFile.mv('public/'+filePath, function(err) {
+            if (err)
+            res.redirect("/admin/blog/"+req.params.id+"/edit");
+        });
+    }
+    const blogObj={
+        title:req.body.title,
+        slug:req.body.slug,
+        details:req.body.details
+    };
+
+    if(filePath){
+        blogObj.image=filePath;
     }
 
-    let sampleFile;
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No files were uploaded.');
-    }
-
-    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    sampleFile = req.files.image;
-    let rnd = new Date().valueOf();
-    let filePath = 'upload/' + rnd + sampleFile.name;
-
-    // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv('public/' + filePath, function (err) {
-      if (err)
-        // return res.status(500).send(err);
-
-        return res.redirect("/admin/blog/create");
+    // /
+    BlogModel.findByIdAndUpdate(req.params.id,blogObj,(err,blog)=>{
+        if(err){
+            res.redirect("/admin/blog/"+req.params.id+"/edit");
+        }
+        res.redirect("/admin/blog");
     });
 
-    BlogModel.findByIdAndUpdate(req.params.id, {
-      title: req.body.title,
-      image: filePath,
-      details: req.body.details,
-      slug: req.body.slug
-    }, (err, blog) => {
-      return res.redirect("/admin/blog");
-    });
-  },
+},
+
 
 }
 
