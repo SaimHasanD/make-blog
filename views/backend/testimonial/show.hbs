@@ -1,1 +1,65 @@
-<h1>{{title}}</h1>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+                <li class="breadcrumb-item "><a href="/admin/testimonial">Testimonial</a></li>
+                <li class="breadcrumb-item active">Show</li>
+
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+
+        <div class="card">
+            <div class="card-body">
+                <a class="btn btn-outline-warning btn-sm float-end my-2" href="/admin/testimonial/create">Create</a>
+
+                <!-- Dark Table -->
+                <table class="table">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Name</th>
+                            <td>:</td>
+                            <td>
+                                {{testimonial.name}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Designation</th>
+                            <td>:</td>
+                            <td>
+                                {{testimonial.designation}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Image</th>
+                            <td>:</td>
+                            <td>
+                                <img src="/{{testimonial.image}}" width="200px" alt="">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Details</th>
+                            <td>:</td>
+                            <td>
+                                {{testimonial.details}}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!-- End Dark Table -->
+
+            </div>
+        </div>
+    </section>
+</main>
