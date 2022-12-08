@@ -10,11 +10,11 @@ router.get('/create', contactController.create);
 
 router.get('/:id/edit', contactController.edit);
 
-router.delete('/:id/delete', contactController.delete);
+router.post('/:id/delete', contactController.delete);
 
 router.get('/:id/show', contactController.show);
 
 router.post('/store', request.store, contactController.store); 
 
-router.put('/:id/update', contactController.update);
+router.post('/:id/update', contactController.update);
 module.exports = router;

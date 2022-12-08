@@ -10,12 +10,12 @@ router.get('/create', teamController.create);
 
 router.get('/:id/edit', teamController.edit);
 
-router.delete('/:id/delete', teamController.delete);
+router.post('/:id/delete', teamController.delete);
 
 router.get('/:id/show', teamController.show);
 
 router.post('/store', request.store, teamController.store); 
 
-router.put('/:id/update', teamController.update);
+router.post('/:id/update', teamController.update);
 
 module.exports = router;

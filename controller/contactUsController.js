@@ -36,7 +36,7 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    ContactModel.findByIdAndRemove(req.params.id, (err, contact) => {
+    ContactModel.findByIdAndDelete(req.params.id, (err, contact) => {
       if (err) {
         console.log("Could not deleted.");
       }
@@ -65,27 +65,69 @@ module.exports = {
   },
 
   store: (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.json({ error: errors.mapped() });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //   return res.json({ error: errors.mapped() });
+    // }
+    // const contact = new ContactModel({
+    //   icon: req.body.icon,
+    //   title: req.body.title,
+    //   details: req.body.details
+    // })
 
-    const contact = new ContactModel({
-      icon: req.body.icon,
-      title: req.body.title,
-      details: req.body.details
-    })
+    // contact.save((err, newContact) => {
+    //   if (err) {
+    //     return res.json({ err: err.mapped() });
+    //   }
+    //   return res.json({ contact: newContact });
+    // })
 
-    contact.save((err, newContact) => {
-      if (err) {
-        return res.json({ error: errors.mapped() });
-      }
-      return res.json({ contact: newContact });
-    })
-
-    // return res.json(req.body);
+    return res.json(req.body);
     // res.render('index', { layout: 'backend/layout', });
   },
+
+  // store: (req, res, next) => {
+  //   const errors = validationResult(req);
+  //   if (!errors.isEmpty()) {
+  //     return res.json({ error: errors.mapped() });
+  //   }
+
+  //   let sampleFile;
+  //   if (!req.files || Object.keys(req.files).length === 0) {
+  //     return res.status(400).send('No files were uploaded.');
+  //   }
+
+  //   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  //   sampleFile = req.files.image;
+  //   let rnd = new Date().valueOf();
+  //   let filePath = 'upload/' + rnd + sampleFile.name;
+
+  //   // Use the mv() method to place the file somewhere on your server
+  //   sampleFile.mv('public/' + filePath, function (err) {
+  //     if (err)
+  //       // return res.status(500).send(err);
+
+  //       return res.redirect("/admin/contact-us/create");
+  //   });
+
+  //   const contact = new ContactModel({
+  //     title: req.body.title,
+  //     image: filePath,
+  //     details: req.body.details,
+  //   })
+
+  //   contact.save((err, newContact) => {
+  //     if (err) {
+  //       return res.json({ error: "Something went wrong!" + err });
+  //     }
+  //     return res.redirect("/admin/contact");
+  //     // return res.json(req.body);
+
+  //   })
+
+  //   // return res.json(req.body);
+  //   // res.render('index', { layout: 'backend/layout', });
+  // },
 
   update: (req, res, next) => {
     res.render('index', { title: 'Admin Contact update', layout: 'backend/layout' });

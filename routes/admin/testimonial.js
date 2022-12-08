@@ -10,12 +10,12 @@ router.get('/create', testimonialController.create);
 
 router.get('/:id/edit', testimonialController.edit);
 
-router.delete('/:id/delete', testimonialController.delete);
+router.post('/:id/delete', testimonialController.delete);
 
 router.get('/:id/show', testimonialController.show);
 
 router.post('/store', request.store, testimonialController.store); 
 
-router.put('/:id/update', testimonialController.update);
+router.post('/:id/update', testimonialController.update);
 
 module.exports = router;
