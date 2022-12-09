@@ -36,7 +36,6 @@ module.exports = {
     ContactModel.findById(req.params.id)
       .then((contact) => {
 
-        // blog list
         const details = {
           title: contact.title,
           details: contact.details,
@@ -130,8 +129,6 @@ module.exports = {
     // res.render('index', { layout: 'backend/layout', });
   },
 
-  // store: (req, res, next) => {
-  //   const errors = validationResult(req);
   //   if (!errors.isEmpty()) {
   //     return res.json({ error: errors.mapped() });
   //   }

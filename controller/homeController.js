@@ -1,4 +1,5 @@
 require('dotenv').config()
+const TestimonialModel = require('../Models/testimonial');
 
 
 module.exports={
@@ -22,7 +23,28 @@ module.exports={
       },
 
     testimonial: (req, res, next)=> {
-        res.render('frontend/testimonial', { title: 'testimonial' });
+
+      TestimonialModel.find((err, docs) => {
+        if (err) {
+          return res.json({ error: "Something went wrong!" + err });
+        }
+        const data = [];
+        docs.forEach(element => {
+          data.push({
+            name: element.name,
+            designation: element.designation,
+            image: element.image,
+            details: element.details,
+            id: element._id
+          });
+        });
+        console.log(data);
+
+        // return res.json({testimonials:docs});
+        res.render('frontend/testimonial', { title: 'testimonial', data: data });
+      })
+
+        // res.render('frontend/testimonial', { title: 'testimonial' });
       },
 
     contactUs: (req, res, next)=> {
