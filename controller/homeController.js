@@ -1,58 +1,104 @@
 require('dotenv').config()
 const TestimonialModel = require('../Models/testimonial');
+const TeamModel = require('../Models/team');
+const AboutModel = require('../Models/about');
+const BlogModel = require('../Models/blog');
+const ContactModel = require('../Models/contact');
 
+module.exports = {
+  index: (req, res, next) => {
+    res.render('frontend/index', {
+      name: `${process.env.APP_NAME} ${process.env.APP_db}`,
+      db: process.env.APP_DB,
+      port: process.env.APP_PORT
+    });
+  },
 
-module.exports={
-    index: (req, res, next)=> {
-        res.render('frontend/index', { 
-        name:`${process.env.APP_NAME} ${process.env.APP_db}`,
-        db:process.env.APP_DB, 
-        port:process.env.APP_PORT});
-      },
+  blog: (req, res, next) => {
+    res.render('frontend/blog', { title: 'blogs' });
+  },
 
-    blog: (req, res, next)=> {
-        res.render('frontend/blog', { title: 'blogs' });
-      },
+  singlePost: (req, res, next) => {
+    res.render('frontend/single-post', { title: 'single-post' });
+  },
 
-    singlePost: (req, res, next)=> {
-        res.render('frontend/single-post', { title: 'single-post' });
-      },
-      
-    team: (req, res, next)=> {
-        res.render('frontend/team', { title: 'team' });
-      },
+  team: (req, res, next) => {
+    TeamModel.find((err, docs) => {
+      if (err) {
+        return res.render({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          name: element.name,
+          designation: element.designation,
+          image: element.image,
+          // facebook: element.facebook,
+          // twitter: element.twitter,
+          // instagram: element.instagram,
+          // linked: element.linked,
+          id: element._id
+        });
+      });
 
-    testimonial: (req, res, next)=> {
+      console.log(data);
+      // return res.json({teams:docs});
+      res.render('frontend/teamPractice', { title: 'team', data: data });
+    });
+    // res.render('frontend/team', { title: 'team'});
 
-      TestimonialModel.find((err, docs) => {
+  },
+
+  testimonial: (req, res, next) => {
+
+    TestimonialModel.find((err, docs) => {
+      if (err) {
+        return res.json({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          name: element.name,
+          designation: element.designation,
+          image: element.image,
+          details: element.details,
+          id: element._id
+        });
+      });
+
+      // return res.json({testimonials:docs});
+      res.render('frontend/testimonialPractice', { title: 'testimonial', data: data }, console.log(data));
+    })
+
+    // res.render('frontend/testimonial', { title: 'testimonial' });
+  },
+
+  contactUs: (req, res, next) => {
+    res.render('frontend/contactUs', { title: 'contact' });
+  },
+
+  about: (req, res, next) => {
+      AboutModel.find((err, docs) => {
         if (err) {
-          return res.json({ error: "Something went wrong!" + err });
+          return res.render({ error: "Something went wrong!" + err });
         }
         const data = [];
         docs.forEach(element => {
           data.push({
-            name: element.name,
-            designation: element.designation,
+            title: element.title,
             image: element.image,
             details: element.details,
-            id: element._id
+            // map: element.map,
+            id: element._id,
           });
         });
-        console.log(data);
 
-        // return res.json({testimonials:docs});
-        res.render('frontend/testimonial', { title: 'testimonial', data: data });
-      })
 
-        // res.render('frontend/testimonial', { title: 'testimonial' });
-      },
+        // return res.json({about:docs});
+        res.render('frontend/aboutPractice', { title: 'about', data: data });
+      });
+      // res.render('frontend/about', { title: 'about' });
+    
+  },
 
-    contactUs: (req, res, next)=> {
-        res.render('frontend/contactUs', { title: 'contact' });
-      },
-
-    about: (req, res, next)=> {
-        res.render('frontend/about', { title: 'about' });
-      },
-   
 }

@@ -5,21 +5,17 @@ const AboutSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    title1 : {
+    title : {
         type : String,
         required : false
     },  
-    title2 : {
-        type : String,
-        required : true
-    },
     details : {
         type : String,
         required : true
     },
     map : {
         type : String,
-        required : true
+        required : false
     }
 });
 

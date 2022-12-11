@@ -108,7 +108,7 @@ module.exports = {
       // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
       sampleFile = req.files.image;
       let rnd = new Date().valueOf();
-      filePath = 'upload/' + rnd + sampleFile.name;
+      filePath = 'upload/team/' + rnd + sampleFile.name;
       // Use the mv() method to place the file somewhere on your server
       sampleFile.mv('public/' + filePath, function (err) {
         if (err)
@@ -150,7 +150,7 @@ module.exports = {
         // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
         sampleFile = req.files.image;
         let rnd=new Date().valueOf();
-        filePath='upload/' +rnd+sampleFile.name;
+        filePath='upload/team/' +rnd+sampleFile.name;
         // Use the mv() method to place the file somewhere on your server
         sampleFile.mv('public/'+filePath, function(err) {
             if (err)

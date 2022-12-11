@@ -13,8 +13,7 @@ module.exports = {
       const data = [];
       docs.forEach(element => {
         data.push({
-          title1: element.title1,
-          title2: element.title2,
+          title: element.title,
           image: element.image,
           details: element.details,
           // map: element.map,
@@ -39,8 +38,7 @@ module.exports = {
         // about list
         const details = {
           image: about.image,
-          title1: about.title1,
-          title2: about.title2,
+          title: about.title,
           details: about.details,
           map: about.map,
           id: about._id
@@ -79,8 +77,7 @@ module.exports = {
         // about list
         const details = {
           image: about.image,
-          title1: about.title1,
-          title2: about.title2,
+          title: about.title,
           details: about.details,
           map: about.map
         }
@@ -109,7 +106,7 @@ module.exports = {
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = req.files.image;
     let rnd = new Date().valueOf();
-    let filePath = 'upload/' + rnd + sampleFile.name;
+    let filePath = 'upload/about/' + rnd + sampleFile.name;
 
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv('public/' + filePath, function (err) {
@@ -121,8 +118,7 @@ module.exports = {
 
     const about = new AboutModel({
       image: filePath,
-      title1: req.body.title1,
-      title2: req.body.title2,
+      title: req.body.title,
       details: req.body.details,
       map: req.body.map
     })
@@ -152,14 +148,14 @@ module.exports = {
         let rnd=new Date().valueOf();
         filePath='upload/' +rnd+sampleFile.name;
         // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv('public/'+filePath, function(err) {
+        sampleFile.mv('public/about/'+filePath, function(err) {
             if (err)
             res.redirect("/admin/about/"+req.params.id+"/edit");
         });
     }
     const aboutObj={
         title:req.body.title,
-        slug:req.body.slug,
+        map:req.body.map,
         details:req.body.details
     };
 
