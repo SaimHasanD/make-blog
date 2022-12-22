@@ -41,10 +41,10 @@ module.exports={
         console.log(data);
 
         // return res.json({testimonials:docs});
-        res.render('frontend/testimonial', { title: 'testimonial', data: data });
+        // res.render('frontend/testimonialPractice', { title: 'testimonial', data: data });
       })
 
-        // res.render('frontend/testimonial', { title: 'testimonial' });
+        res.render('frontend/testimonial', { title: 'testimonial' });
       },
 
     contactUs: (req, res, next)=> {

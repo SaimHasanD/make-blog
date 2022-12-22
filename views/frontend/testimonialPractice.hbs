@@ -1,0 +1,93 @@
+<head>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="frontend/stylesheets/testimonial.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <main id="main">
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Testimonials</h2>
+                    <p>Voluptatem quibusdam ut ullam perferendis repellat non ut consequuntur est eveniet deleniti
+                        fignissimos eos quam</p>
+                </div>
+                <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-wrap">
+                                {{#each data}}
+                                <div class="testimonial-item">
+                                    <div class="d-flex align-items-center">
+                                        <img src="/{{image}}" class="testimonial-img flex-shrink-0" alt="">
+                                        <div>
+                                            <h3>{{name}}</h3>
+                                            <h4>{{designation}}</h4>
+                                            <div class="stars">
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                                    class="bi bi-star-fill"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        {{details}}.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                                {{/each}}
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+
+            </div>
+        </section><!-- End Testimonials Section -->
+    </main><!-- End #main -->
+
+    <!-- Vendor JS Files -->
+    <script src="frontend/vendor/purecounter/purecounter_vanilla.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="frontend/javascripts/testimonial.js"></script>
+
+</body>
+
+
+{{!-- <main>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+<h1>fytradtbiunoamfl</h1>
+{{#each data}}
+<h1>{{name}}</h1>
+{{/each}}
+
+</main> --}}
+
+<!-- End testimonial item -->

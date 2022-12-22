@@ -6,7 +6,6 @@ var logger = require('morgan');
 const { engine } = require('express-handlebars')
 const fileUpload = require('express-fileupload');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin/index');
@@ -16,10 +15,24 @@ var contactRouter = require('./routes/admin/contact-us');
 var linkRouter = require('./routes/admin/link');
 var teamRouter = require('./routes/admin/team');
 var testimonialRouter = require('./routes/admin/testimonial');
+const { session } = require('passport');
 require('./config/database');
 
 
 var app = express();
+
+// Configure Sessions Middleware
+app.use(session({
+  secret: 'r8q,+&1LM3)CD*zAGpx1xm{NeQhc;#',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
+}));
+
+// Configure More Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 //file upload
 app.use(fileUpload());
 
