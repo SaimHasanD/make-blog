@@ -14,43 +14,43 @@
 
     <section class="section dashboard">
 
-          <div class="card">
+        <div class="card">
             <div class="card-body">
                 <a class="btn btn-outline-warning btn-sm float-end my-2" href="/admin/contact-us/create">Create</a>
 
-              <!-- Dark Table -->
-              <table class="table">
-                <thead>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Title</th>
-                        <td>:</td>
-                        <td>
-                            {{contact.title}}
-                        </td>
-                    </tr>
+                <!-- Dark Table -->
+                <table class="table">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Title</th>
+                            <td>:</td>
+                            <td>
+                                {{contact.title}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>Details</th>
-                        <td>:</td>
-                        <td>
-                            {{contact.details}}
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>Details</th>
+                            <td>:</td>
+                            <td>
+                                {{contact.details}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>Image</th>
-                        <td>:</td>
-                        <td>
-                            <img src="/{{contact.image}}" width="200px" alt="">
-                        </td>
-                    </tr>
-                </tbody>
-              </table>
-              <!-- End Dark Table -->
+                        <tr>
+                            <th>icon</th>
+                            <td>:</td>
+                            <td>
+                                <i class="{{contact.icon}}"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- End Dark Table -->
 
             </div>
-          </div>
+        </div>
     </section>
 </main>

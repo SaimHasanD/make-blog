@@ -13,7 +13,6 @@ var adminRouter = require('./routes/admin/index');
 var aboutRouter = require('./routes/admin/about');
 var blogRouter = require('./routes/admin/blog');
 var contactRouter = require('./routes/admin/contact-us');
-var linkRouter = require('./routes/admin/link');
 var teamRouter = require('./routes/admin/team');
 var testimonialRouter = require('./routes/admin/testimonial');
 require('./config/database');
@@ -48,7 +47,6 @@ app.use('/admin', adminRouter);
 app.use('/admin/about', aboutRouter);
 app.use('/admin/blog', blogRouter);
 app.use('/admin/contact-us', contactRouter);
-app.use('/admin/link', linkRouter);
 app.use('/admin/team', teamRouter);
 app.use('/admin/testimonial', testimonialRouter);
 

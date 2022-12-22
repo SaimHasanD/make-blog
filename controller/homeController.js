@@ -74,7 +74,25 @@ module.exports = {
   },
 
   contactUs: (req, res, next) => {
-    res.render('frontend/contactUs', { title: 'contact' });
+    
+    ContactModel.find((err, docs) => {
+      if (err) {
+        return res.json({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          title: element.title,
+          details: element.details,
+          icon: element.icon,
+          id: element._id
+        });
+      });
+
+      // return res.json({contacts:docs});
+      res.render('frontend/contactUSPractice', { title: 'contact', data: data });
+    });
+    // res.render('frontend/contactUs', { title: 'contact' });
   },
 
   about: (req, res, next) => {

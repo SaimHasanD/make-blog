@@ -15,8 +15,7 @@ module.exports = {
         data.push({
           title: element.title,
           details: element.details,
-          image: element.image,
-          slug: element.slug,
+          icon: element.icon,
           id: element._id
         });
       });
@@ -39,7 +38,7 @@ module.exports = {
         const details = {
           title: contact.title,
           details: contact.details,
-          image: contact.image,
+          icon: contact.icon,
           id: contact._id
         }
         // console.log(details);
@@ -56,7 +55,7 @@ module.exports = {
 
       // /delete file
       try {
-        fs.unlink("public/" + blog.image, () => {
+        fs.unlink("public/" + blog.icon, () => {
           console.log("File deleted====================================");
         });
       } catch (error) {
@@ -75,7 +74,7 @@ module.exports = {
         const details = {
           title: contact.title,
           details: contact.details,
-          image: contact.image
+          icon: contact.icon
         }
         // console.log(details);
         res.render('backend/contact/show', { layout: "backend/layout", contact: details });
@@ -92,26 +91,9 @@ module.exports = {
       return res.json({ error: errors.mapped() });
     }
 
-    let sampleFile;
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No files were uploaded.');
-    }
-
-    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    sampleFile = req.files.image;
-    let rnd = new Date().valueOf();
-    let filePath = 'upload/' + rnd + sampleFile.name;
-
-    // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv('public/' + filePath, function (err) {
-      if (err)
-        // return res.status(500).send(err);
-
-        return res.redirect("/admin/contact-us/create");
-    });
 
     const contact = new ContactModel({
-      image: filePath,
+      icon: req.body.icon,
       title: req.body.title,
       details: req.body.details
     })
@@ -139,7 +121,7 @@ module.exports = {
   //   }
 
   //   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  //   sampleFile = req.files.image;
+  //   sampleFile = req.files.icon;
   //   let rnd = new Date().valueOf();
   //   let filePath = 'upload/' + rnd + sampleFile.name;
 
@@ -153,7 +135,7 @@ module.exports = {
 
   //   const contact = new ContactModel({
   //     title: req.body.title,
-  //     image: filePath,
+  //     icon: filePath,
   //     details: req.body.details,
   //   })
 
@@ -176,27 +158,11 @@ module.exports = {
       return res.json({ error: errors.mapped() });
     }
 
-    let sampleFile, filePath;
-    if (req.files) {
-      // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-      sampleFile = req.files.image;
-      let rnd = new Date().valueOf();
-      filePath = 'upload/' + rnd + sampleFile.name;
-      // Use the mv() method to place the file somewhere on your server
-      sampleFile.mv('public/' + filePath, function (err) {
-        if (err)
-          res.redirect("/admin/contact-us/" + req.params.id + "/edit");
-      });
-    }
     const contactObj = {
       title: req.body.title,
-      slug: req.body.slug,
+      icon: req.body.icon,
       details: req.body.details
     };
-
-    if (filePath) {
-      contactObj.image = filePath;
-    }
 
     ContactModel.findByIdAndUpdate(req.params.id, contactObj, (err, newContact) => {
       if (err) {
