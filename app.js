@@ -51,6 +51,10 @@ app.use('/admin/team', teamRouter);
 app.use('/admin/testimonial', testimonialRouter);
 
 // catch 404 and forward to error handler
+app.get("*",(rea,res)=>{
+  res.json({error:"Page not found"});
+})
+
 app.use(function (req, res, next) {
   next(createError(404));
 });

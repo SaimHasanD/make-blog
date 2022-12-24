@@ -93,7 +93,9 @@ module.exports = {
   store: (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.json({ error: errors.mapped() });
+      // return res.redirect("/admin/about/create");
+
+      return res.json({ errors});
     }
 
     let sampleFile;

@@ -7,11 +7,26 @@ const ContactModel = require('../Models/contact');
 
 module.exports = {
   index: (req, res, next) => {
-    res.render('frontend/index', {
-      name: `${process.env.APP_NAME} ${process.env.APP_db}`,
-      db: process.env.APP_DB,
-      port: process.env.APP_PORT
+    BlogModel.find((err, docs) => {
+      if (err) {
+        return res.json({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          title: element.title,
+          details: element.details,
+          image: element.image,
+          slug: element.slug,
+          id: element._id
+        });
+      });
+
+      console.log(data);
+      // return res.json({blogs:docs});
+      res.render('frontend/indexPractice', { data: data });
     });
+    // res.render('frontend/index');
   },
 
   blog: (req, res, next) => {
@@ -74,7 +89,7 @@ module.exports = {
   },
 
   contactUs: (req, res, next) => {
-    
+
     ContactModel.find((err, docs) => {
       if (err) {
         return res.json({ error: "Something went wrong!" + err });
@@ -96,27 +111,27 @@ module.exports = {
   },
 
   about: (req, res, next) => {
-      AboutModel.find((err, docs) => {
-        if (err) {
-          return res.render({ error: "Something went wrong!" + err });
-        }
-        const data = [];
-        docs.forEach(element => {
-          data.push({
-            title: element.title,
-            image: element.image,
-            details: element.details,
-            // map: element.map,
-            id: element._id,
-          });
+    AboutModel.find((err, docs) => {
+      if (err) {
+        return res.render({ error: "Something went wrong!" + err });
+      }
+      const data = [];
+      docs.forEach(element => {
+        data.push({
+          title: element.title,
+          image: element.image,
+          details: element.details,
+          // map: element.map,
+          id: element._id,
         });
-
-
-        // return res.json({about:docs});
-        res.render('frontend/aboutPractice', { title: 'about', data: data });
       });
-      // res.render('frontend/about', { title: 'about' });
-    
+
+
+      // return res.json({about:docs});
+      res.render('frontend/aboutPractice', { title: 'about', data: data });
+    });
+    // res.render('frontend/about', { title: 'about' });
+
   },
 
 }
