@@ -9,7 +9,7 @@
               
               {{#each data}}
               <div class="swiper-slide">
-                <a href="{{id}}/read" class="img-bg d-flex align-items-end"
+                <a href="single-post" class="img-bg d-flex align-items-end"
                   style="background-image: url('/{{image}}');">
                   <div class="img-bg-inner">
                     <h2>{{title}}</h2>
@@ -65,10 +65,10 @@
             {{#each data}}
             <div class="col-6 border-start custom-border">
               <div class="post-entry-1">
-                <a href="single-post.html"><img src="/{{image}}" alt="" class="img-fluid"></a>
+                <a href="single-post"><img src="/{{image}}" alt="" class="img-fluid"></a>
                 <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul
                     5th '22</span></div>
-                <h2><a href="{{id}}/read">{{title}}</a></h2>
+                <h2><a href="single-post">{{title}}</a></h2>
               </div>
             </div>
             {{/each}}
@@ -85,8 +85,7 @@
             <ul class="trending-post">
               {{#each data}}
               <li>
-                <a href="{{id}}/read">
-                  <span class="number">1</span>
+                <a href="single-post">
                   <h3>{{title}}</h3>
                   <span class="author">Jane Cooper</span>
                 </a>

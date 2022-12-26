@@ -48,10 +48,10 @@ module.exports = {
           name: element.name,
           designation: element.designation,
           image: element.image,
-          // facebook: element.facebook,
-          // twitter: element.twitter,
-          // instagram: element.instagram,
-          // linked: element.linked,
+          facebook: element.facebook,
+          twitter: element.twitter,
+          instagram: element.instagram,
+          linked: element.linked,
           id: element._id
         });
       });
