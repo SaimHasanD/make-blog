@@ -52,7 +52,8 @@ app.use('/admin/testimonial', testimonialRouter);
 
 // catch 404 and forward to error handler
 app.get("*",(rea,res)=>{
-  res.json({error:"Page not found"});
+  // res.json({error:"Page not found"});
+  res.render("frontend/notFound");
 })
 
 app.use(function (req, res, next) {

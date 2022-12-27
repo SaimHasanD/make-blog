@@ -24,7 +24,7 @@ module.exports = {
 
       console.log(data);
       // return res.json({blogs:docs});
-      res.render('frontend/indexPractice', { data: data });
+      res.render('frontend/index', { data: data });
     });
     // res.render('frontend/index');
   },
@@ -58,7 +58,7 @@ module.exports = {
 
       console.log(data);
       // return res.json({teams:docs});
-      res.render('frontend/teamPractice', { title: 'team', data: data });
+      res.render('frontend/team', { title: 'team', data: data });
     });
     // res.render('frontend/team', { title: 'team'});
 
@@ -82,7 +82,7 @@ module.exports = {
       });
 
       // return res.json({testimonials:docs});
-      res.render('frontend/testimonialPractice', { title: 'testimonial', data: data }, console.log(data));
+      res.render('frontend/testimonial', { title: 'testimonial', data: data }, console.log(data));
     })
 
     // res.render('frontend/testimonial', { title: 'testimonial' });
@@ -105,7 +105,7 @@ module.exports = {
       });
 
       // return res.json({contacts:docs});
-      res.render('frontend/contactUSPractice', { title: 'contact', data: data });
+      res.render('frontend/contactUS', { title: 'contact', data: data });
     });
     // res.render('frontend/contactUs', { title: 'contact' });
   },
@@ -128,7 +128,7 @@ module.exports = {
 
 
       // return res.json({about:docs});
-      res.render('frontend/aboutPractice', { title: 'about', data: data });
+      res.render('frontend/about', { title: 'about', data: data });
     });
     // res.render('frontend/about', { title: 'about' });
 

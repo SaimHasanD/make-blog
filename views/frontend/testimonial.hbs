@@ -1,150 +1,137 @@
 <head>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="frontend/stylesheets/testimonial.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="frontend/stylesheets/testimonial.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <main id="main">
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
+    <main id="main">
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials">
+            <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2>Testimonials</h2>
-          <p>Voluptatem quibusdam ut ullam perferendis repellat non ut consequuntur est eveniet deleniti fignissimos eos quam</p>
-        </div>
-
-        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="frontend/images/testimonials/testimonials-1.jpg" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Saul Goodman</h3>
-                      <h4>Ceo &amp; Founder</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
+                <div class="section-header">
+                    <h2>Testimonials</h2>
+                    <p>Voluptatem quibusdam ut ullam perferendis repellat non ut consequuntur est eveniet deleniti
+                        fignissimos eos quam</p>
                 </div>
-              </div>
-            </div><!-- End testimonial item -->
+                <div class="swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="frontend/images/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Sara Wilsson</h3>
-                      <h4>Designer</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-wrap row">
+                                {{#each data}}
+                                <div class="testimonial-item  col-md-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="/{{image}}" class="testimonial-img flex-shrink-0" alt="">
+                                        <div>
+                                            <h3>{{name}}</h3>
+                                            <h4>{{designation}}</h4>
+                                            <div class="stars">
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                                    class="bi bi-star-fill"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        {{details}}.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                                {{/each}}
+                            </div>
+
+                        </div>
+
                     </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
+                    <div class="swiper-pagination"></div>
                 </div>
-              </div>
-            </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="frontend/images/testimonials/testimonials-3.jpg" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Jena Karlis</h3>
-                      <h4>Store Owner</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="frontend/images/testimonials/testimonials-4.jpg" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>Matt Brandon</h3>
-                      <h4>Freelancer</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+            </div>
+        </section><!-- End Testimonials Section -->
+    </main><!-- End #main -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <div class="d-flex align-items-center">
-                    <img src="frontend/images/testimonials/testimonials-5.jpg" class="testimonial-img flex-shrink-0" alt="">
-                    <div>
-                      <h3>John Larson</h3>
-                      <h4>Entrepreneur</h4>
-                      <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore.
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+    <!-- Vendor JS Files -->
+    <script src="frontend/vendor/purecounter/purecounter_vanilla.js"></script>
 
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
-  </main><!-- End #main -->
-
-  <!-- Vendor JS Files -->
-  <script src="frontend/vendor/purecounter/purecounter_vanilla.js"></script>
- 
-  <!-- Template Main JS File -->
-  <script src="frontend/javascripts/testimonial.js"></script>
+    <!-- Template Main JS File -->
+    <script src="frontend/javascripts/testimonial.js"></script>
 
 </body>
+
+{{!-- 
+<main>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+<h1>i don't know what is this</h1>
+<h1>{{title}}</h1>
+{{#each data}}
+<h1>{{name}}</h1>
+{{/each}}
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Details</th>
+
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each data}}
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{name}}</td>
+                            <td>{{designation}}</td>
+                            <td>
+                                <img src="/{{image}}" width="60px" alt="{{title}}">
+                            </td>
+                            <td>{{details}}</td>
+                            <td>
+                                <a href="/admin/testimonial/{{id}}/show" class="btn btn-outline-info btn-sm">Show</a>
+                                <a href="/admin/testimonial/{{id}}/edit" class="btn btn-outline-primary btn-sm">Edit</a>
+                                <form action="/admin/testimonial/{{id}}/delete" method="post">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+                <a href="/admin/testimonial/create" class="btn btn-outline-success btn-sm">Data Create</a>
+
+            </div>
+        </div>
+    </section>
+
+</main> --}}
+
+<!-- End testimonial item -->
